@@ -36,7 +36,10 @@
 
   --shadow: 0 1px 2px rgba(17, 17, 17, 0.04), 0 12px 30px -16px rgba(17, 17, 17, 0.16);
 
-  --sans: "Arimo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  /* Body: Archivo, the grotesque named in the logo kit (stands in for Akzidenz-Grotesk) */
+  --sans: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Headings: Fraunces, a contemporary serif standing in for ABC Arizona Serif */
+  --display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   --container: 1120px;
@@ -76,8 +79,8 @@ h1, h2, h3, p, ul, ol, figure { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 svg { flex: none; }
 
-h1, h2, h3 { color: var(--heading); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
-/* Green accent words in headings: same Arimo face as the rest of the heading,
+h1, h2, h3 { font-family: var(--display); color: var(--heading); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+/* Green accent words in headings: same Fraunces face as the rest of the heading,
    set apart by colour alone. */
 h1 em, h2 em {
   font-style: normal;
@@ -119,8 +122,12 @@ h1 em, h2 em {
   cursor: pointer;
   transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.2s var(--ease);
 }
+/* Chunky "pressable key" style: a hard, unblurred lip sits under each button and
+   the button sinks into it when pressed. --lip is the lip's depth, so a variant
+   only has to set its own colour (and .btn--sm a shallower depth). */
+.btn { --lip: 4px; }
 .btn:hover { transform: translateY(-1px); }
-.btn:active { transform: none; }
+.btn:active { transform: translateY(calc(var(--lip) - 1px)); }
 .btn svg { width: 17px; height: 17px; }
 /* Primary: gradient fill that slides toward the deeper end on hover */
 .btn--primary {
@@ -128,13 +135,15 @@ h1 em, h2 em {
   background-size: 200% 100%;
   background-position: 0% 50%;
   color: #fff;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 8px 20px -10px rgba(21, 115, 102, 0.6);
-  transition: background-position 0.5s var(--ease), box-shadow 0.3s var(--ease), transform 0.2s var(--ease);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 var(--lip) 0 #0B4F55;
+  transition: background-position 0.5s var(--ease), box-shadow 0.2s var(--ease), transform 0.12s var(--ease);
 }
 .btn--primary:hover {
   background-position: 100% 50%;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 12px 26px -10px rgba(21, 115, 102, 0.7);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 calc(var(--lip) + 1px) 0 #0B4F55;
 }
+/* Pressed: the button drops onto its lip, leaving a 1px edge */
+.btn--primary:active { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 1px 0 #0B4F55; }
 /* Secondary: white fill with a gradient border */
 .btn--secondary {
   color: var(--heading);
@@ -142,17 +151,26 @@ h1 em, h2 em {
     linear-gradient(var(--surface), var(--surface)) padding-box,
     var(--grad-edge) border-box;
 }
+.btn--secondary {
+  box-shadow: 0 var(--lip) 0 #CFE3DE;
+  transition: background 0.2s, box-shadow 0.2s var(--ease), transform 0.12s var(--ease);
+}
 .btn--secondary:hover {
   background:
     linear-gradient(#F2F8F6, #F2F8F6) padding-box,
     var(--grad-edge) border-box;
+  box-shadow: 0 calc(var(--lip) + 1px) 0 #CFE3DE;
 }
+.btn--secondary:active { box-shadow: 0 1px 0 #CFE3DE; }
 /* High-contrast mode drops backgrounds, so give buttons a visible edge */
 @media (forced-colors: active) {
   .btn, .card__link { border-color: ButtonText; }
 }
-.btn--sm { height: 40px; padding: 0 1.05rem; font-size: 0.875rem; }
+.btn--sm { --lip: 3px; height: 40px; padding: 0 1.05rem; font-size: 0.875rem; }
 .btn--block { width: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover, .btn:active { transform: none; }
+}
 
 .label {
   display: inline-flex;
@@ -207,17 +225,13 @@ h1 em, h2 em {
   box-shadow: 0 1px 2px rgba(17, 17, 17, 0.04), 0 14px 34px -14px rgba(17, 17, 17, 0.22);
 }
 .brand { display: inline-flex; align-items: center; text-decoration: none; }
+/* The logo SVG carries its own rounded tile and colour, so no background or
+   border-radius here — styling it would fight the artwork. */
 .brand__mark {
+  flex: none; /* the nav row would otherwise squeeze it out of square on phones */
   width: 36px;
   height: 36px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--accent);
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  display: block;
   transition: transform 0.3s var(--ease);
 }
 .brand:hover .brand__mark { transform: scale(1.06); }
@@ -298,6 +312,25 @@ h1 em, h2 em {
   place-items: center;
   padding-block: clamp(1.75rem, 5svh, 4.5rem);
   text-align: center;
+}
+
+/* Decorative line texture behind the hero. Sits in a ::before rather than on
+   .hero itself so it can never tint the section's own background, and is
+   pointer-events:none so it never intercepts a click on the buttons. */
+.hero { position: relative; isolation: isolate; }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url("../assets/hero-lines.svg") center / cover no-repeat;
+  /* fade the texture out before it reaches the content's baseline */
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
+}
+@media (forced-colors: active) {
+  .hero::before { display: none; }
 }
 .hero__inner { width: 100%; max-width: 820px; margin-inline: auto; padding-inline: 1.25rem; }
 .js .hero [data-enter] {
@@ -741,7 +774,7 @@ details[open] > summary .plus svg { transform: rotate(45deg); }
 }
 
 /* ---------- Display titles ----------
-   Hero, section and page titles are Arimo like everything else: bold, tight
+   Hero, section and page titles use the display serif: bold, tight
    letter-spacing, snug line-height. Set explicitly so the sizes below hold even
    when a title is not an h1/h2/h3. */
 .hero__title,

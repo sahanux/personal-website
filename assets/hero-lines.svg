@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" fill="none" aria-hidden="true">
+  <!-- Decorative "current lines" for the hero. Drawn in the brand teal at low
+       opacity so it reads as texture, never as content. -->
+  <g stroke="#157366" stroke-width="2" stroke-linecap="round" opacity="0.5">
+    <path d="M-80 742C140 700 268 596 402 512 536 428 690 392 852 372 1014 352 1180 318 1320 246 1400 205 1460 160 1520 104" stroke-opacity="0.16"/>
+    <path d="M-80 830C120 800 300 742 432 640 564 538 700 500 880 486 1060 472 1220 430 1360 352 1432 312 1480 276 1520 238" stroke-opacity="0.12"/>
+    <path d="M-80 640C90 606 232 520 360 424 488 328 636 288 800 276 964 264 1140 224 1272 150 1350 106 1440 60 1520 18" stroke-opacity="0.10"/>
+    <path d="M-60 520C80 486 210 420 330 330 450 240 590 190 742 178 894 166 1052 130 1190 66 1268 30 1360 -12 1440 -48" stroke-opacity="0.08"/>
+    <path d="M-80 900C160 880 340 840 470 760 600 680 742 640 906 628 1070 616 1230 580 1366 508" stroke-opacity="0.09"/>
+    <path d="M120 900C240 856 350 790 452 706 554 622 676 578 820 564" stroke-opacity="0.07"/>
+    <path d="M-40 400C110 362 230 300 340 214 450 128 580 78 730 62" stroke-opacity="0.06"/>
+    <path d="M560 900C650 848 730 790 800 722 870 654 962 610 1080 592 1198 574 1310 540 1416 482" stroke-opacity="0.08"/>
+    <path d="M880 900C950 862 1016 816 1076 760 1136 704 1216 668 1318 650 1386 638 1444 620 1500 594" stroke-opacity="0.07"/>
+    <path d="M-80 250C40 220 146 168 240 96 334 24 438 -20 552 -40" stroke-opacity="0.05"/>
+    <path d="M1060 -40C1096 30 1148 88 1216 134 1284 180 1356 214 1440 236" stroke-opacity="0.06"/>
+    <path d="M1180 900C1228 856 1288 820 1360 792 1420 769 1470 742 1512 710" stroke-opacity="0.06"/>
+  </g>
+</svg>

@@ -132,7 +132,7 @@
   const header = () => `
     <div class="topbar__inner">
       <a class="brand" href="${PAGE === "home" ? "#top" : "index.html"}" aria-label="${attr(S.person.name)}, home">
-        <span class="brand__mark" aria-hidden="true">${S.person.initials}</span>
+        <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36" decoding="async">
       </a>
       <nav class="topnav" aria-label="Primary">
         ${S.nav
