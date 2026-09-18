@@ -15,6 +15,11 @@ window.SITE = {
     timezone: "Asia/Colombo", // drives the live local-time clock
     email: "sahanuiux@gmail.com",
     phone: "+94 76 652 6087",
+    // WhatsApp button. Leave "" to use `phone` above (digits only, no + or spaces),
+    // or set a different number here, e.g. "94766526087".
+    whatsapp: "",
+    // First line pre-filled in the visitor's WhatsApp; leave "" for an empty chat.
+    whatsappMessage: "Hi Sahan, I saw your portfolio.",
     linkedin: "linkedin.com/in/sahanux",
     linkedinUrl: "https://www.linkedin.com/in/sahanux",
     cv: "cv.pdf", // the CV file in the project root; opens in a new tab when clicked
@@ -235,12 +240,12 @@ window.SITE = {
         tint: "green",
       },
       {
-        name: "Ophtascan",
+        name: "Oncotech",
         category: "MedTech",
-        description: "The world's first clinically tested on-demand screening system, by Oncotech Nordic.",
+        description: "The MedTech company behind Ophtascan, the world's first clinically tested on-demand screening system.",
         role: "UX Designer & Operations. Designed the screening experience.",
-        url: "",
-        urlLabel: "",
+        url: "https://oncotech.global",
+        urlLabel: "Oncotech Nordic AB",
         image: "assets/work/ophtascan.jpg",
         imageAlt: "Ophtascan in use: a clinician adjusts the smartphone headset while it captures a close-up photo of a patient's eye",
         imageHint: "assets/work/ophtascan.jpg",
@@ -252,8 +257,8 @@ window.SITE = {
         description:
           "An AI-driven platform that aggregates and vets AI engineering talent from emerging markets for global companies.",
         role: "Co-Founder & COO. Led product, operations and marketing.",
-        url: "",
-        urlLabel: "",
+        url: "https://www.linkedin.com/company/talport",
+        urlLabel: "LinkedIn",
         image: "",
         imageHint: "assets/work/talport.jpg",
         tint: "lilac",

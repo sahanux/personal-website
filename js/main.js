@@ -24,6 +24,11 @@
     external: () => svg('<path d="M7 17 17 7m0 0H9m8 0v8"/>'),
     mail: () => svg('<rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7.5 8 5.5 8-5.5"/>'),
     phone: () => svg('<path d="M5.5 4h3l1.8 4.6-2.3 1.5a11 11 0 0 0 5.9 5.9l1.5-2.3L20 15.5v3a2 2 0 0 1-2 2A16 16 0 0 1 3.5 6a2 2 0 0 1 2-2z"/>'),
+    whatsapp: () =>
+      svg(
+        '<path d="M12 3.2a8.8 8.8 0 0 0-7.5 13.4L3.2 20.8l4.3-1.3A8.8 8.8 0 1 0 12 3.2z"/>' +
+        '<path d="M9.1 8.6c.3 2 2.3 4 4.3 4.3.5.1 1-.2 1.2-.6l.2-.5-1.8-1-.6.7a5.4 5.4 0 0 1-1.9-1.9l.7-.6-1-1.8-.5.2c-.4.2-.7.7-.6 1.2z"/>'
+      ),
     linkedin: () => svg('<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 10.5V17M8 7.2v.01M12 17v-3.6a2.4 2.4 0 0 1 4.8 0V17M12 10.5V17"/>'),
     pin: () => svg('<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),
     copy: () => svg('<rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/>', "i-copy"),
@@ -60,6 +65,13 @@
   const pad = (n) => String(n).padStart(2, "0");
   const attr = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
   const cvAttrs = () => `href="${S.person.cv}" target="_blank" rel="noopener"`;
+
+  // wa.me needs digits only; falls back to `phone` when `whatsapp` is blank
+  const waHref = () => {
+    const num = String(S.person.whatsapp || S.person.phone).replace(/\D/g, "");
+    const msg = S.person.whatsappMessage ? `?text=${encodeURIComponent(S.person.whatsappMessage)}` : "";
+    return `https://wa.me/${num}${msg}`;
+  };
 
   // Section links scroll in place on the main page, and point back to it from other pages
   const navHref = (n) => (n.href ? n.href : PAGE === "home" ? `#${n.target}` : `index.html#${n.target}`);
@@ -120,6 +132,15 @@
       </nav>
     </div>`;
 
+  // Floating contact shortcuts, bottom-right on every page
+  const floatingContact = () => `
+    <div class="fab" role="group" aria-label="Contact shortcuts">
+      <a class="fab__btn fab__btn--wa" href="${waHref()}" target="_blank" rel="noopener"
+         aria-label="Message me on WhatsApp" title="WhatsApp">${ICON.whatsapp()}</a>
+      <a class="fab__btn fab__btn--li" href="${S.person.linkedinUrl}" target="_blank" rel="noopener"
+         aria-label="Connect with me on LinkedIn" title="LinkedIn">${ICON.linkedin()}</a>
+    </div>`;
+
   const footer = () => `
     <div class="container footer__inner">
       <p>© ${new Date().getFullYear()} ${S.person.name} · ${S.person.title}</p>
@@ -128,7 +149,8 @@
         <a href="${S.person.linkedinUrl}" target="_blank" rel="noopener">LinkedIn</a>
       </nav>
       <p class="footer__credit">${S.footer.credit}</p>
-    </div>`;
+    </div>
+    ${floatingContact()}`;
 
   /* ======================================================================
      MAIN PAGE SECTIONS
@@ -326,6 +348,10 @@
                 <li>
                   <span class="clist__icon">${ICON.phone()}</span>
                   <span class="clist__text"><small>Phone</small><a href="tel:${tel}">${p.phone}</a></span>
+                </li>
+                <li>
+                  <span class="clist__icon">${ICON.whatsapp()}</span>
+                  <span class="clist__text"><small>WhatsApp</small><a href="${waHref()}" target="_blank" rel="noopener">Message me on WhatsApp</a></span>
                 </li>
                 <li>
                   <span class="clist__icon">${ICON.linkedin()}</span>

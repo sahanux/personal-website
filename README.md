@@ -1,6 +1,6 @@
 # Sahan Karunarathne · Portfolio
 
-A simple portfolio in plain HTML, CSS and JavaScript. There's no build step and no dependencies (the font is Roboto, from Google Fonts). The site is light theme only, with fully rounded buttons, pills and circles and soft-cornered cards.
+A simple portfolio in plain HTML, CSS and JavaScript. There's no build step and no dependencies (the font is Arimo, from Google Fonts). The site is light theme only, with fully rounded buttons, pills and circles and soft-cornered cards.
 
 ## Pages
 

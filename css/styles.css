@@ -36,7 +36,7 @@
 
   --shadow: 0 1px 2px rgba(17, 17, 17, 0.04), 0 12px 30px -16px rgba(17, 17, 17, 0.16);
 
-  --sans: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: "Arimo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   --container: 1120px;
@@ -76,8 +76,8 @@ h1, h2, h3, p, ul, ol, figure { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 svg { flex: none; }
 
-h1, h2, h3 { color: var(--heading); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
-/* Green accent words in headings: same Roboto face as the rest of the heading,
+h1, h2, h3 { color: var(--heading); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+/* Green accent words in headings: same Arimo face as the rest of the heading,
    set apart by colour alone. */
 h1 em, h2 em {
   font-style: normal;
@@ -216,7 +216,7 @@ h1 em, h2 em {
   background: var(--accent);
   color: #fff;
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.02em;
   transition: transform 0.3s var(--ease);
 }
@@ -356,7 +356,7 @@ h1 em, h2 em {
   border-radius: 50%;
   background: var(--surface);
   font-size: clamp(2.4rem, 6vw, 3.2rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.04em;
   color: var(--accent);
 }
@@ -409,7 +409,7 @@ h1 em, h2 em {
 .card__media { position: relative; aspect-ratio: 16 / 10; background: var(--tint, var(--tint-green)); }
 .card__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .ph { position: absolute; inset: 0; display: grid; place-items: center; }
-.ph__name { font-size: clamp(1.6rem, 4vw, 2.1rem); font-weight: 800; letter-spacing: -0.04em; color: var(--heading); opacity: 0.75; }
+.ph__name { font-size: clamp(1.6rem, 4vw, 2.1rem); font-weight: 700; letter-spacing: -0.04em; color: var(--heading); opacity: 0.75; }
 .ph__hint {
   position: absolute;
   left: 0.8rem;
@@ -422,7 +422,9 @@ h1 em, h2 em {
   color: var(--muted);
 }
 .card__body { display: flex; flex-direction: column; flex: 1; padding: 1.3rem 1.4rem 1.45rem; }
-.card__top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+/* wrap so a long link label (e.g. a company name) drops below the category
+   on very narrow phones instead of squeezing it */
+.card__top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem 1rem; }
 /* Product link: small outlined pill (same gradient edge as the secondary buttons) */
 .card__link {
   flex: none;
@@ -729,15 +731,24 @@ details[open] > summary .plus svg { transform: rotate(45deg); }
 .footer__nav a:hover { color: var(--accent); }
 .footer__credit { width: 100%; font-size: 0.78rem; }
 
+/* The floating WhatsApp/LinkedIn buttons are fixed bottom-right, so they can
+   cover the footer two ways: vertically when the page is scrolled to the end,
+   and horizontally on a short page (e.g. Videos) where the footer is already on
+   screen at rest. Reserve room in both directions below 900px. */
+@media (max-width: 899px) {
+  .footer { padding-bottom: calc(2.5rem + 64px); }
+  .footer__inner { padding-right: 76px; }
+}
+
 /* ---------- Display titles ----------
-   Hero, section and page titles are Roboto like everything else: bold, tight
+   Hero, section and page titles are Arimo like everything else: bold, tight
    letter-spacing, snug line-height. Set explicitly so the sizes below hold even
    when a title is not an h1/h2/h3. */
 .hero__title,
 .section-title,
 .split__head h2,
 .page-title {
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.12;
 }
@@ -745,6 +756,41 @@ details[open] > summary .plus svg { transform: rotate(45deg); }
 .section-title { font-size: clamp(1.8rem, 4.4vw, 2.6rem); }
 .split__head h2 { font-size: clamp(1.45rem, 3.2vw, 1.9rem); }
 .page-title { font-size: clamp(2.1rem, 5.2vw, 3.1rem); }
+
+/* ---------- Floating contact buttons (WhatsApp + LinkedIn) ----------
+   Fixed bottom-right on both pages. Brand colours so they're recognisable at a
+   glance; sits under the toast (z-index 100) so a copy confirmation still wins. */
+.fab {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.fab__btn {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--r-full);
+  color: #fff;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s var(--ease), filter 0.2s;
+}
+.fab__btn svg { width: 24px; height: 24px; }
+.fab__btn--wa { background: #1FA855; }
+.fab__btn--li { background: #0A66C2; }
+.fab__btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+@media (max-width: 479px) {
+  .fab__btn { width: 46px; height: 46px; }
+  .fab__btn svg { width: 21px; height: 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fab__btn { transition: none; }
+  .fab__btn:hover { transform: none; }
+}
 
 /* ---------- Toast ---------- */
 .toast {
