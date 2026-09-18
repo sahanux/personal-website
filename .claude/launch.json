@@ -3,7 +3,16 @@
   "configurations": [
     {
       "name": "portfolio",
-      "url": "http://localhost:5173"
+      "url": "http://localhost:5173",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "5173",
+        "--directory",
+        "public"
+      ],
+      "port": 5173
     }
   ]
 }
