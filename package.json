@@ -1,0 +1,25 @@
+{
+  "name": "personal-website",
+  "version": "1.0.0",
+  "description": "A simple portfolio in plain HTML, CSS and JavaScript. There's no build step and no dependencies (the font is Arimo, from Google Fonts). The site is light theme only, with fully rounded buttons, pills and circles and soft-cornered cards.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sahanux/personal-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sahanux/personal-website/issues"
+  },
+  "homepage": "https://github.com/sahanux/personal-website#readme",
+  "private": "true",
+  "devDependencies": {
+    "wrangler": "^4.134.0"
+  }
+}
