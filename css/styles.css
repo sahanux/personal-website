@@ -780,8 +780,8 @@ details[open] > summary .plus svg { transform: rotate(45deg); }
   transition: transform 0.2s var(--ease), filter 0.2s;
 }
 .fab__btn svg { width: 24px; height: 24px; }
-.fab__btn--wa { background: #1FA855; }
-.fab__btn--li { background: #0A66C2; }
+.fab__btn--wa { background: #29A71A; }
+.fab__btn--li { background: #0077B5; }
 .fab__btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
 @media (max-width: 479px) {
   .fab__btn { width: 46px; height: 46px; }
