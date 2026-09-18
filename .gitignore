@@ -4,3 +4,7 @@
 # Editor/OS noise
 Thumbs.db
 *.swp
+
+# Tooling (wrangler for Cloudflare Pages deploys)
+node_modules/
+.wrangler/
