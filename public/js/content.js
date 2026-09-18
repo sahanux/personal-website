@@ -248,7 +248,7 @@ window.SITE = {
         role: "UX Designer & Operations. Designed the screening experience.",
         url: "https://oncotech.global",
         urlLabel: "Oncotech Nordic AB",
-        image: "assets/work/oncotech.jpg",
+        image: "assets/work/oncotech.jpg?v=2",
         imageAlt: "Ophtascan in use: a clinician adjusts the smartphone headset on a patient while it captures a close-up photo of her eye",
         imageHint: "assets/work/oncotech.jpg",
         tint: "blue",
