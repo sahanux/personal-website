@@ -176,7 +176,14 @@
         <div class="hero__inner">
           <p class="label" data-enter style="--i:0">${h.label
             .split("·")
-            .map((part) => `<span>${part.trim()}</span>`)
+            .map(
+              (part, i) =>
+                `<span>${
+                  i === 0 && h.labelEmoji
+                    ? `<span class="label__emoji" aria-hidden="true">${h.labelEmoji}</span>`
+                    : ""
+                }${part.trim()}</span>`
+            )
             .join('<span class="label__sep" aria-hidden="true">·</span>')}</p>
           <h1 class="hero__title" data-enter style="--i:1">${h.headline}</h1>
           <p class="hero__lead" data-enter style="--i:2">${h.lead}</p>
@@ -254,7 +261,7 @@
                     <span class="ph__name">${it.name}</span>
                     ${it.image ? "" : `<span class="ph__hint">image slot → ${it.imageHint || "assets/work/…"}</span>`}
                   </div>
-                  ${it.image ? `<img src="${it.image}" alt="${attr(it.imageAlt || `${it.name} screenshot`)}" loading="lazy" onerror="this.remove()">` : ""}
+                  ${it.image ? `<img src="${it.image}" alt="${attr(it.imageAlt || `${it.name} screenshot`)}"${it.imagePosition ? ` style="object-position:${attr(it.imagePosition)}"` : ""} loading="lazy" onerror="this.remove()">` : ""}
                 </div>
                 <div class="card__body">
                   <div class="card__top">

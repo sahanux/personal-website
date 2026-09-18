@@ -45,6 +45,8 @@ window.SITE = {
   home: {
     // Question in the pill above the headline (the headline answers it)
     label: "Tired of work getting stuck between teams?",
+    // Emoji shown before the question. Set to "" to hide it.
+    labelEmoji: "\u{1F6A7}",
     headline: "I Run Company Operations, <em>Start to End.</em>",
     lead:
       "I manage company operations end to end, from people and tools to delivery and growth, and keep improving the process so the whole business runs smoother.",
@@ -246,9 +248,9 @@ window.SITE = {
         role: "UX Designer & Operations. Designed the screening experience.",
         url: "https://oncotech.global",
         urlLabel: "Oncotech Nordic AB",
-        image: "assets/work/ophtascan.jpg",
-        imageAlt: "Ophtascan in use: a clinician adjusts the smartphone headset while it captures a close-up photo of a patient's eye",
-        imageHint: "assets/work/ophtascan.jpg",
+        image: "assets/work/oncotech.jpg",
+        imageAlt: "Ophtascan in use: a clinician adjusts the smartphone headset on a patient while it captures a close-up photo of her eye",
+        imageHint: "assets/work/oncotech.jpg",
         tint: "blue",
       },
       {

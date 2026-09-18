@@ -175,7 +175,9 @@ h1 em, h2 em {
 .label {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.5rem;
   padding: 0.5rem 1.15rem;
   border-radius: var(--r-full);
   background: var(--accent-soft);
@@ -188,6 +190,16 @@ h1 em, h2 em {
   text-wrap: balance;
 }
 /* On narrow screens, stack the label's parts instead of wrapping mid-phrase */
+.label__emoji {
+  /* Inline inside the question's own span, so it flows and wraps with the
+     words. As a separate flex child it was pushed onto its own line whenever
+     the question wrapped. The trailing space is a margin, because the pill's
+     caps letter-spacing would otherwise add a phantom gap after the glyph. */
+  display: inline;
+  margin-right: 0.45em;
+  letter-spacing: 0;
+  font-size: 1.15em;
+}
 @media (max-width: 479px) {
   .label { flex-direction: column; gap: 0.15rem; padding-inline: 1.2rem; border-radius: var(--r-card); }
   .label__sep { display: none; }
