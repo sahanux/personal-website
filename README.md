@@ -5,24 +5,24 @@ A simple portfolio in plain HTML, CSS and JavaScript. There's no build step and 
 ## Pages
 
 ```
-index.html     Main page: hero, About, How I work, Work, Experience, Toolkit, Education, Contact
-videos.html    Videos: your YouTube videos (featured + grid + topic filters)
+public/index.html      Main page: hero, About, How I work, Work, Experience, Toolkit, Education, Contact
+public/videos.html     Videos: your YouTube videos (featured + grid + topic filters)
 ```
 
 Both pages share these files:
 
 ```
-css/styles.css    All styling (design tokens at the top, including the rounding: --r-full, --r-card)
-js/content.js     ← ALL site text lives here. Edit this file to change content.
-js/main.js        Renders content.js into each page and wires up interactions
-cv.pdf            Your CV. The "Download CV" buttons open it in a new tab.
+public/css/styles.css  All styling (design tokens at the top, including the rounding: --r-full, --r-card)
+public/js/content.js   ← ALL site text lives here. Edit this file to change content.
+public/js/main.js      Renders content.js into each page and wires up interactions
+public/cv.pdf          Your CV. The "Download CV" buttons open it in a new tab.
                   To update it, overwrite this file (keep the name).
-assets/work/      Drop product screenshots here
+public/assets/work/    Drop product screenshots here
 ```
 
 ## Adding a YouTube video
 
-Open `js/content.js`, find `videos` → `items`, and add a block like this:
+Open `public/js/content.js`, find `videos` → `items`, and add a block like this:
 
 ```js
 {
@@ -56,7 +56,7 @@ python3 -m http.server 5173
 
 Then open http://localhost:5173.
 
-**Seeing old content after an edit?** Browsers cache the CSS and JS files. Hard-refresh (Cmd+Shift+R on Mac, Ctrl+Shift+R on Windows). Before publishing changes, bump the `?v=` number on the `css/styles.css`, `js/content.js` and `js/main.js` links at the top of `index.html` and `videos.html` (e.g. `?v=20260915` → `?v=20260920`), so visitors get the new files too.
+**Seeing old content after an edit?** Browsers cache the CSS and JS files. Hard-refresh (Cmd+Shift+R on Mac, Ctrl+Shift+R on Windows). Before publishing changes, bump the `?v=` number on the `css/styles.css`, `js/content.js` and `js/main.js` links at the top of `public/index.html` and `public/videos.html` (e.g. `?v=20260915` → `?v=20260920`), so visitors get the new files too.
 
 ## Deploying
 
