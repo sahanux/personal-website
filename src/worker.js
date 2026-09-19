@@ -1,21 +1,14 @@
 /**
- * The site is static; this Worker exists only to keep one canonical hostname.
+ * The site is static, so this Worker just hands every request to the asset
+ * store. Both hostnames — sahankaru.online and www.sahankaru.online — serve
+ * the site directly; neither redirects to the other.
  *
- * www.sahankaru.online → sahankaru.online (301), preserving path and query.
- * Every other hostname (the apex itself, *.workers.dev, localhost) is served
- * straight from the static assets in public/.
+ * (An earlier version redirected www to the apex for a single canonical URL.
+ * If that is ever wanted again, redirect here rather than in the dashboard,
+ * so the rule stays in version control.)
  */
-const CANONICAL = "sahankaru.online";
-
 export default {
   async fetch(request, env) {
-    const url = new URL(request.url);
-
-    if (url.hostname === `www.${CANONICAL}`) {
-      url.hostname = CANONICAL;
-      return Response.redirect(url.toString(), 301);
-    }
-
     return env.ASSETS.fetch(request);
   },
 };
