@@ -146,6 +146,7 @@
               }${n.shortLabel ? ` aria-label="${attr(n.label)}"` : ""}>${navText(n)}</a>`
           )
           .join("")}
+        <a class="btn btn--primary btn--sm topnav__cv" ${cvAttrs()}>${ICON.download()}<span class="topnav__cv-label">Download CV</span></a>
       </nav>
     </div>`;
 

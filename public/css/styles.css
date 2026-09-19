@@ -248,7 +248,7 @@ h1 em, h2 em {
 }
 .brand:hover .brand__mark { transform: scale(1.06); }
 .topnav { display: flex; align-items: center; gap: clamp(1rem, 3.2vw, 2.4rem); }
-.topnav a {
+.topnav a:not(.btn) {
   position: relative;
   padding: 0.35rem 0;
   font-size: 1rem;
@@ -257,12 +257,12 @@ h1 em, h2 em {
   text-decoration: none;
   transition: color 0.2s;
 }
-.topnav a:hover { color: var(--heading); }
-.topnav a.is-active,
-.topnav a[aria-current="page"] { color: var(--heading); }
+.topnav a:not(.btn):hover { color: var(--heading); }
+.topnav a:not(.btn).is-active,
+.topnav a:not(.btn)[aria-current="page"] { color: var(--heading); }
 /* Underline: grows out from the centre — a faint preview on hover, full teal when active.
    Transform-only, so switching the active link never shifts the layout. */
-.topnav a::after {
+.topnav a:not(.btn)::after {
   content: "";
   position: absolute;
   left: 0;
@@ -274,9 +274,9 @@ h1 em, h2 em {
   transform: scaleX(0);
   transition: transform 0.35s var(--ease), background-color 0.25s;
 }
-.topnav a:hover::after { transform: scaleX(0.55); }
-.topnav a.is-active::after,
-.topnav a[aria-current="page"]::after { transform: scaleX(1); background: var(--accent); }
+.topnav a:not(.btn):hover::after { transform: scaleX(0.55); }
+.topnav a:not(.btn).is-active::after,
+.topnav a:not(.btn)[aria-current="page"]::after { transform: scaleX(1); background: var(--accent); }
 .topnav .hide-sm { display: none; }
 .topnav__short { display: none; }
 /* Below 900px the full six-link bar gets tight, so long labels use their short version */
@@ -286,18 +286,29 @@ h1 em, h2 em {
 }
 @media (max-width: 479px) {
   .topbar__inner { height: 56px; padding: 0 1.15rem 0 0.65rem; }
-  .topnav a { font-size: 0.9rem; }
+  .topnav a:not(.btn) { font-size: 0.9rem; }
 }
 @media (max-width: 380px) {
   .topnav { gap: 0.75rem; }
-  .topnav a { font-size: 0.85rem; }
+  .topnav a:not(.btn) { font-size: 0.85rem; }
 }
 @media (max-width: 350px) {
   .topnav { gap: 0.6rem; }
-  .topnav a { font-size: 0.8rem; }
+  .topnav a:not(.btn) { font-size: 0.8rem; }
 }
 @media (min-width: 640px) {
   .topnav .hide-sm { display: inline; }
+}
+
+/* CV button in the nav bar. It sits inside .topnav, so on desktop it is the
+   last item in the row and on phones it lands inside the dropdown panel — one
+   element, no duplicate markup to keep in sync. */
+.topnav__cv { flex: none; margin-left: 0.5rem; }
+.topnav__cv svg { width: 15px; height: 15px; }
+/* 768-899px is the tight band: six links plus the button inside a 980px pill */
+@media (max-width: 899px) and (min-width: 768px) {
+  .topnav__cv { margin-left: 0.25rem; padding: 0 0.7rem; }
+  .topnav__cv-label { display: none; }
 }
 
 /* ---------- Mobile menu ----------
@@ -362,12 +373,13 @@ h1 em, h2 em {
     transform: none;
     transition-delay: 0s;
   }
-  .topnav a { padding: 0.7rem 0.9rem; border-radius: 14px; font-size: 1rem; }
-  .topnav a:hover { background: var(--accent-soft); }
+  .topnav a:not(.btn) { padding: 0.7rem 0.9rem; border-radius: 14px; font-size: 1rem; }
+  .topnav a:not(.btn):hover { background: var(--accent-soft); }
   /* the centre-out underline reads oddly on full-width rows */
-  .topnav a::after { display: none; }
-  .topnav a.is-active,
-  .topnav a[aria-current="page"] { background: var(--accent-soft); color: var(--accent); }
+  .topnav a:not(.btn)::after { display: none; }
+  .topnav a:not(.btn).is-active,
+  .topnav a:not(.btn)[aria-current="page"] { background: var(--accent-soft); color: var(--accent); }
+  .topnav__cv { width: 100%; justify-content: center; margin: 0.35rem 0 0; }
   /* the panel has room, so show every link and its full label */
   .topnav .hide-sm { display: block; }
   .topnav__long { display: inline; }
