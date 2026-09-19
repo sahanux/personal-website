@@ -132,9 +132,12 @@
   const header = () => `
     <div class="topbar__inner">
       <a class="brand" href="${PAGE === "home" ? "#top" : "index.html"}" aria-label="${attr(S.person.name)}, home">
-        <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36" decoding="async">
+        <img class="brand__mark" src="assets/logo.svg?v=2" alt="" width="36" height="36" decoding="async">
       </a>
-      <nav class="topnav" aria-label="Primary">
+      <button class="navtoggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+        <span class="navtoggle__bars" aria-hidden="true"></span>
+      </button>
+      <nav class="topnav" id="primary-nav" aria-label="Primary">
         ${S.nav
           .map(
             (n) =>
@@ -266,7 +269,7 @@
                 <div class="card__body">
                   <div class="card__top">
                     <span class="eyebrow">${it.category}</span>
-                    ${it.url ? `<a class="card__link" href="${it.url}" target="_blank" rel="noopener">${it.urlLabel || "Visit"} ${ICON.external()}</a>` : ""}
+                    ${it.url ? `<a class="card__link" href="${it.url}" target="_blank" rel="noopener" aria-label="${attr(`${it.urlLabel || "Visit"} ${it.name}`)}">${it.urlLabel || "Visit"} ${ICON.external()}</a>` : ""}
                   </div>
                   <h3>${it.name}</h3>
                   <p class="card__desc">${it.description}</p>
@@ -531,6 +534,40 @@
     const onScroll = () => bar.classList.toggle("is-scrolled", window.scrollY > 8);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+  })();
+
+  /* ---------- Mobile menu ---------- */
+  (() => {
+    const btn = $(".navtoggle");
+    const nav = $(".topnav");
+    if (!btn || !nav) return;
+
+    const setOpen = (open) => {
+      nav.classList.toggle("is-open", open);
+      btn.setAttribute("aria-expanded", String(open));
+      btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    };
+    const isOpen = () => btn.getAttribute("aria-expanded") === "true";
+
+    btn.addEventListener("click", () => setOpen(!isOpen()));
+    // a link was followed, so the menu has done its job
+    nav.addEventListener("click", (e) => {
+      if (e.target.closest("a")) setOpen(false);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen()) {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+    document.addEventListener("click", (e) => {
+      if (isOpen() && !e.target.closest(".topbar__inner")) setOpen(false);
+    });
+    // widening past the breakpoint restores the inline bar: drop the open state
+    // so it can't linger and reappear next time the window narrows
+    matchMedia("(min-width: 768px)").addEventListener("change", (e) => {
+      if (e.matches) setOpen(false);
+    });
   })();
 
   /* ---------- Hero entrance ---------- */
